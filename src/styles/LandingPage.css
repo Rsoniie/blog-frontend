@@ -1,0 +1,11 @@
+/* src/styles/LandingPage.css */
+.landing-page {
+    padding: 20px;
+  }
+  
+  .blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
