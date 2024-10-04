@@ -1,11 +1,127 @@
-/* src/styles/LandingPage.css */
-.landing-page {
-    padding: 20px;
-  }
-  
-  .blog-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.header h1 {
+  font-size: 1.5em;
+}
+
+.header nav {
+  display: flex;
+  gap: 15px;
+}
+
+.header nav a, .header .mode-toggle {
+  color: #fff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* Blog List and Card Styling */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.blog-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.blog-item.expanded {
+  transform: scale(1.05);
+}
+
+.user-info {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.blog-header h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.blog-body p {
+  font-size: 1em;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.blog-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #888;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+/* Three-Dot Menu and Dropdown Styling */
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 5px 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
