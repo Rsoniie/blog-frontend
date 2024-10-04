@@ -33,15 +33,37 @@ function LandingPage() {
 
   const toggleMenu = () => setShowMenu(!showMenu);
 
+  // const handleLogout = async () => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     await axios.get('http://localhost:8080/user/LogoutUser', {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  
+  //     localStorage.removeItem('token');
+  //     navigate('/login');
+  //   } catch (err) {
+  //     console.error("Error logging out:", err);
+  //     setError("Failed to log out. Please try again.");
+  //   }
+  // };
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.get('http://localhost:8080/user/LogoutUser', {
+      const response = await axios.get('http://localhost:8080/user/LogoutUser', {
         headers: { Authorization: `Bearer ${token}` },
       });
   
-      localStorage.removeItem('token');
-      navigate('/login');
+      if (response.status === 200 || response.status === 204) {
+        // Logout successful: clear token, then refresh to go to login screen
+        localStorage.removeItem('token');
+        navigate('/login');
+        window.location.reload(); // Refresh page to ensure redirection to login
+      } else {
+        console.error("Unexpected response:", response);
+        setError("Failed to log out. Please try again.");
+      }
     } catch (err) {
       console.error("Error logging out:", err);
       setError("Failed to log out. Please try again.");

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LandingPage from './pages/LandingPages';
 import PostBlog from './pages/PostBlog';
 import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
   const token = localStorage.getItem('token');
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={token ? <Navigate to="/landing" /> : <Login />} />
         <Route path="/landing" element={token ? <LandingPage /> : <Navigate to="/login" />} />
         <Route path="/post-blog" element={token ? <PostBlog /> : <Navigate to="/login" />} />
+        <Route path="/signup" element={token ? <Navigate to="/landing" /> : <Signup />} />
       </Routes>
     </Router>
   );

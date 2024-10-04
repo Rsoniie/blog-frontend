@@ -7,7 +7,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
-  const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleMenu = () => setShowMenu((prev) => !prev);
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token');
@@ -25,18 +25,21 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1>Blogging Platform</h1>
-      <nav>
+      <h1 onClick={() => navigate('/')}>Blogging Platform</h1>
+      <nav className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
         <Link to="/post-blog">Post</Link>
-        <button className="menu-button" onClick={toggleMenu}>⋮</button>
-        {showMenu && (
-          <div className="dropdown-menu">
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        )}
       </nav>
+      <button className="menu-button" onClick={toggleMenu}>⋮</button>
+      
+      {showMenu && (
+        <div className="dropdown-menu">
+          <button onClick={() => navigate('/profile')}>Profile</button>
+          <button onClick={() => navigate('/post-blog')}>Post Blog</button>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      )}
     </header>
   );
 };
