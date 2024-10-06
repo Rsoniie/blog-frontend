@@ -70,7 +70,7 @@ function LandingPage() {
     }
   };
 
-  // Function to handle liking a blog
+  // // Function to handle liking a blog
   const handleLike = async (blogId) => {
     try {
       console.log(blogId);
@@ -83,12 +83,14 @@ function LandingPage() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      // window.location.reload();
   
-      console.log(response.status);
+      console.log(response);
   
       // Check if the response was successful
-      if (response.status === 200) {
+      if (response.status === 200) { 
         // Update the likes count in the local state
+        console.log(response.data.updatedLikes);
         setBlogs(blogs.map((blog) => 
           blog._id === blogId ? { ...blog, likes: response.data.updatedLikes } : blog
         ));
@@ -103,7 +105,7 @@ function LandingPage() {
       }
     }
   };
-  
+
 
   const renderBlogs = () => {
     return blogs.map((blog) => (
