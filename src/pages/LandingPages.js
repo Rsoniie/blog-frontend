@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LandingPage.css';
 
+
 function LandingPage() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogId, setExpandedBlogId] = useState(null);
@@ -70,7 +71,6 @@ function LandingPage() {
     }
   };
 
-  // // Function to handle liking a blog
   const handleLike = async (blogId) => {
     try {
       console.log(blogId);
@@ -107,6 +107,32 @@ function LandingPage() {
   };
 
 
+  const handleComment = async (blog_Id) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log("Authorization error, no token found");
+      }
+      
+      const response = await axios.get(
+        `http://localhost:8080/blog/all_comments/${blog_Id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      
+      const comments = response.data.net_comments;
+      console.log(comments);
+      
+      // Navigate and pass comments via state
+      navigate("/all_comments", { state: { comments, blog_Id } });
+      
+    } catch (error) {
+      console.log("This is error while fetching data", error);
+    }
+  };
+  
+
   const renderBlogs = () => {
     return blogs.map((blog) => (
       <div key={blog._id} className={`blog-item ${expandedBlogId === blog._id ? "expanded" : ""}`}>
@@ -129,7 +155,7 @@ function LandingPage() {
         </div>
         <div className="blog-footer">
           <button onClick={() => handleLike(blog._id)}>Likes: {blog.likes}</button>
-          <span>Comments: {blog.comments.length}</span>
+          <button onClick={() => handleComment(blog._id)}>Comments: {blog.comments.length}</button>
         </div>
       </div>
     ));
